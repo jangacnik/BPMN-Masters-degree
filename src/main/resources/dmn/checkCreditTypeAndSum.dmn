@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="dtCheckCreditType" name="dtCheckCreditType" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.17.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
+  <decision id="Decision_0jimqcv" name="Decision 1">
+    <decisionTable id="DecisionTable_0kvvuyv">
+      <input id="Input_1" label="typeOfCredit">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0q6wdos" label="creditAmount">
+        <inputExpression id="LiteralExpression_05y31fr" typeRef="number">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="creditCheckType" typeRef="string" />
+      <rule id="DecisionRule_13tske0">
+        <inputEntry id="UnaryTests_1wn4k3n">
+          <text>QUICK</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gobkkk">
+          <text>&lt;= 1000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12yf5kd">
+          <text>REQ_QUICK_CHECK</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13vipjs">
+        <inputEntry id="UnaryTests_1yha7h7">
+          <text>AUTOMOTIVE</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oyrm6z">
+          <text>&lt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j2t8tv">
+          <text>REQ_AUTO_MIN_CHECK</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05n243o">
+        <inputEntry id="UnaryTests_0gcnumh">
+          <text>ONLINE</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t4q0l7">
+          <text>&lt;= 1000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pfry0r">
+          <text>REQ_QUICK_CHECK</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xmno7c">
+        <inputEntry id="UnaryTests_02jd486">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i3nqql">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bi7bgm">
+          <text>REQ_FULL_CHECK</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_0jimqcv">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
