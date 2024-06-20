@@ -1,5 +1,13 @@
 package com.mag.bpm.models.enums;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum OfferType {
-  AUTOMOTIVE, SHORT, ONLINE
+  AUTOMOTIVE("AUTOMOTIVE"), QUICK("QUICK"), ONLINE("ONLINE");
+
+  private final String value;
 }

@@ -9,6 +9,7 @@ public class CheckMissingDocuments implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution delegateExecution) throws Exception {
-
+    delegateExecution.setVariable("missingDocuments", true);
+    delegateExecution.setVariable("missingDocumentsRetry", 0);
   }
 }

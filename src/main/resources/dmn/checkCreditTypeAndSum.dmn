@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dtCheckCreditType" name="dtCheckCreditType" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.24.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
-  <decision id="Decision_0jimqcv" name="Check Credit Type" camunda:historyTimeToLive="365">
-    <decisionTable id="DecisionTable_0kvvuyv">
-      <input id="Input_1" label="typeOfCredit">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="dtCheckCreditTypeImpl" name="dtCheckCreditType" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.24.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
+  <decision id="dtCheckCreditType" name="Check Credit Type" camunda:historyTimeToLive="365">
+    <decisionTable id="DecisionTable_0kvvuyv" hitPolicy="FIRST">
+      <input id="Input_1" label="typeOfCredit" biodi:width="192" camunda:inputVariable="typeOfCredit">
         <inputExpression id="InputExpression_1" typeRef="string">
-          <text></text>
+          <text>typeOfCredit</text>
         </inputExpression>
       </input>
-      <input id="InputClause_0q6wdos" label="creditAmount">
-        <inputExpression id="LiteralExpression_05y31fr" typeRef="number">
-          <text></text>
+      <input id="InputClause_0q6wdos" label="creditAmount" camunda:inputVariable="creditAmount">
+        <inputExpression id="LiteralExpression_05y31fr" typeRef="double">
+          <text>creditAmount</text>
         </inputExpression>
       </input>
-      <output id="Output_1" name="creditCheckType" typeRef="string" />
+      <output id="Output_1" label="creditCheckType" name="creditCheckType" typeRef="string" biodi:width="192" />
       <rule id="DecisionRule_13tske0">
         <inputEntry id="UnaryTests_1wn4k3n">
-          <text>QUICK</text>
+          <text>"QUICK"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1gobkkk">
           <text>&lt;= 1000</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_12yf5kd">
-          <text>REQ_QUICK_CHECK</text>
+          <text>"REQ_QUICK_CHECK"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_13vipjs">
         <inputEntry id="UnaryTests_1yha7h7">
-          <text>AUTOMOTIVE</text>
+          <text>"AUTOMOTIVE"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1oyrm6z">
           <text>&lt;= 10000</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1j2t8tv">
-          <text>REQ_AUTO_MIN_CHECK</text>
+          <text>"REQ_AUTO_MIN_CHECK"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_05n243o">
         <inputEntry id="UnaryTests_0gcnumh">
-          <text>ONLINE</text>
+          <text>"ONLINE"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1t4q0l7">
           <text>&lt;= 1000</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1pfry0r">
-          <text>REQ_QUICK_CHECK</text>
+          <text>"REQ_QUICK_CHECK"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0xmno7c">
@@ -51,17 +51,28 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_1i3nqql">
-          <text></text>
+          <text>&gt;= 100000</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1bi7bgm">
-          <text>REQ_FULL_CHECK</text>
+          <text>"REQ_RISK_CHECK"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ky9bcc">
+        <inputEntry id="UnaryTests_1vs3tiw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w1kntu">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lbxsd1">
+          <text>"REQ_FULL_CHECK"</text>
         </outputEntry>
       </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="Decision_0jimqcv">
+      <dmndi:DMNShape dmnElementRef="dtCheckCreditType">
         <dc:Bounds height="80" width="180" x="160" y="100" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

@@ -1,10 +1,10 @@
 package com.mag.bpm.models;
 
 import com.mag.bpm.models.enums.OfferType;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.joda.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
