@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dmDecideDocumentCheck" name="DecideDocumentCheck" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.24.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+  <decision id="dtDecideDocumentCheck" name="decideDocumentCheck" camunda:historyTimeToLive="365">
+    <decisionTable id="DecisionTable_03xpbin" hitPolicy="FIRST">
+      <input id="Input_1" label="documentCode" camunda:inputVariable="documentCode">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>documentCode</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="documentCheck" name="documentCheck" typeRef="string" />
+      <rule id="DecisionRule_028rgid">
+        <inputEntry id="UnaryTests_0rj4s50">
+          <text>"IDC100"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bzc6kh">
+          <text>"IDENTIFICATION"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wy7g1y">
+        <inputEntry id="UnaryTests_1gwj14p">
+          <text>"IDC200"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00ksafc">
+          <text>"IDENTIFICATION"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19er7no">
+        <inputEntry id="UnaryTests_0dy3l2c">
+          <text>"PSD100"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15851rj">
+          <text>"INCOME"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1hoph0w">
+        <inputEntry id="UnaryTests_1kfmvxf">
+          <text>"COD100"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01ceelm">
+          <text>"CREDIT_OFFER"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_040jjn5">
+        <inputEntry id="UnaryTests_1x2dpzu">
+          <text>"SAD100"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0esmi91">
+          <text>"SALES_AGREEMENT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_022apga">
+        <inputEntry id="UnaryTests_03o4m5i">
+          <text>"BLL100"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1yzaa7l">
+          <text>"BILLING"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0a26ca1">
+        <inputEntry id="UnaryTests_0wy5hp2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0b01hvt">
+          <text>"OTHER"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="dtDecideDocumentCheck">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
