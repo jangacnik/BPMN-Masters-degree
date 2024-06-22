@@ -62,7 +62,7 @@ public class AutoDocumentCheckServiceTest {
     Map<String, String> map = new HashMap<>();
     map.put("object", "Car");
     map.put("objectType", "CAR");
-    map.put("model", "test");
+    map.put("model", "test1");
     map.put("serial", "987654321");
     map.put("brand", "BMW");
     map.put("totalPrice", "43600");
