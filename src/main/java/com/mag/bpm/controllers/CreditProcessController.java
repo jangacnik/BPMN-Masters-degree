@@ -27,10 +27,12 @@ public class CreditProcessController {
   private final CreditProcessService creditProcessService;
   private final PodamFactory factory = new PodamFactoryImpl();
 
+
   @PostMapping
   public ResponseEntity<Void> creditProcessReceived(@RequestBody CreditRequestDto creditRequestDto)
       throws JsonProcessingException {
     creditProcessService.startCreditProcess(creditRequestDto);
+    logger.debug("PROCESS STARTED");
     return new ResponseEntity<>(HttpStatus.OK);
   }
 

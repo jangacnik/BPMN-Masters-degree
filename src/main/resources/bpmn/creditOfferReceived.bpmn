@@ -99,6 +99,7 @@
         <zeebe:calledElement processId="pdAutoCheckDocuments" propagateAllChildVariables="true" />
         <camunda:in variables="all" />
         <camunda:out source="checkedDocumentIds" target="checkedDocumentIds" />
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0eysmfy</bpmn:incoming>
       <bpmn:outgoing>Flow_1172brt</bpmn:outgoing>
