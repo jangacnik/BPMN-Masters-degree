@@ -1,15 +1,20 @@
 package com.mag.bpm.models;
 
 import com.mag.bpm.models.enums.ObjectType;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreditObject {
+public class CreditObject implements Serializable {
   private String object;
   private ObjectType objectType;
   private String model;

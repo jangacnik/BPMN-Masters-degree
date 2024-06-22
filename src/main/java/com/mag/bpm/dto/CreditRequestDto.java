@@ -1,7 +1,7 @@
 package com.mag.bpm.dto;
 
 import com.mag.bpm.models.CreditOffer;
-import com.mag.bpm.models.DocumentMetadata;
+import com.mag.bpm.models.documents.DocumentMetadata;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;

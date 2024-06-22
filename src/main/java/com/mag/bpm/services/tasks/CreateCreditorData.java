@@ -17,7 +17,7 @@ public class CreateCreditorData  implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution delegateExecution) throws Exception {
-    CreditOffer creditOffer = creditProcessService.getCreditOfferProcessVariable(delegateExecution);
+    CreditOffer creditOffer = creditProcessService.getCreditOfferProcessVariable(delegateExecution.getId());
     if (!creditProcessService.getBooleanProcessVariable(delegateExecution, "existingCustomer1")) {
       creditorService.saveCreditorToDb(creditOffer.getCreditor1());
     }

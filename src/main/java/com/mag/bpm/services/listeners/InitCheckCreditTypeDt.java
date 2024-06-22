@@ -20,7 +20,7 @@ public class InitCheckCreditTypeDt implements ExecutionListener {
 
   @Override
   public void notify(DelegateExecution delegateExecution) throws Exception {
-    CreditOffer creditOffer = creditProcessService.getCreditOfferProcessVariable(delegateExecution);
+    CreditOffer creditOffer = creditProcessService.getCreditOfferProcessVariable(delegateExecution.getId());
 
     delegateExecution.setVariable("creditAmount", creditOffer.getOffer().getOfferAmount());
 

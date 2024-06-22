@@ -2,18 +2,23 @@ package com.mag.bpm.models;
 
 import com.mag.bpm.models.enums.LivingSituation;
 import com.mag.bpm.models.enums.OccupationType;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Setter
+@Getter
 @Document("creditors")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Creditor {
+public class Creditor implements Serializable {
 
   @Id
   private String id;
