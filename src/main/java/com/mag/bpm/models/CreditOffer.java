@@ -1,7 +1,6 @@
 package com.mag.bpm.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -16,11 +15,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("creditOffer")
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class CreditOffer implements Serializable {
   @Id
   private String offerId;
-  private LocalDateTime creationDate;
+  private String creationDate;
   private Creditor creditor1;
   private Creditor creditor2;
   private CreditObject object;

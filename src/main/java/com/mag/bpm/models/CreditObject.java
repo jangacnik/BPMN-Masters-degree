@@ -2,7 +2,6 @@ package com.mag.bpm.models;
 
 import com.mag.bpm.models.enums.ObjectType;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -23,5 +22,5 @@ public class CreditObject implements Serializable {
   private Double totalPrice;
   private Double netPrice;
   private Double vat;
-  private LocalDateTime purchaseDate;
+  private String purchaseDate;
 }

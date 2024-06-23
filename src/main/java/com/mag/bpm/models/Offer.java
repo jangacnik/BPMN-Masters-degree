@@ -2,7 +2,6 @@ package com.mag.bpm.models;
 
 import com.mag.bpm.models.enums.OfferType;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -18,6 +17,8 @@ public class Offer implements Serializable {
   private OfferType offerType;
   private Double offerAmount;
   private Double offerInterest;
+  private Double offerAmountWithInterest;
   private Integer duration;
-  private LocalDateTime payoutDate;
+  private String requestedPayoutDate;
+  private String payoutDate;
 }
