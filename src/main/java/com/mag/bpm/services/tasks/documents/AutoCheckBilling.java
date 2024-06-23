@@ -31,7 +31,7 @@ public class AutoCheckBilling implements JavaDelegate {
         (CreditOffer) delegateExecution.getVariableTyped(CREDIT_OFFER_VARIABLE).getValue();
     boolean autoChecked =
         autoDocumentCheckService.autoCheckDocument(
-            checkProperties, creditOffer.getCreditor1(), documentMetadata);
+            checkProperties, creditOffer.getObject(), documentMetadata);
     log.info(
         "Document with id {} was autoChecked (processId: {}) with result {}",
         documentMetadata.getDocumentId(),

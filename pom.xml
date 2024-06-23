@@ -83,10 +83,10 @@
       <artifactId>postgresql</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.codearte.jfairy</groupId>
-      <artifactId>jfairy</artifactId>
-      <version>0.5.9</version>
-    </dependency>
+    <groupId>com.devskiller</groupId>
+    <artifactId>jfairy</artifactId>
+    <version>0.6.5</version>
+  </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -97,6 +97,19 @@
       <artifactId>commons-text</artifactId>
       <version>1.12.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.17.0</version>
+    </dependency>
+
+    <!-- support for "Java 8 date time api" -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.17.0</version>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
@@ -119,11 +132,6 @@
       <artifactId>podam</artifactId>
       <version>8.0.1.RELEASE</version>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>com.fasterxml.jackson.datatype</groupId>-->
-<!--      <artifactId>jackson-datatype-joda</artifactId>-->
-<!--      <version>2.17.1</version>-->
-<!--    </dependency>-->
   </dependencies>
 
 

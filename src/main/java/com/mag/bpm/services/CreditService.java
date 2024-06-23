@@ -1,9 +1,8 @@
 package com.mag.bpm.services;
 
+import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.repositories.CreditOfferRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,5 +11,11 @@ public class CreditService {
 
   private final CreditOfferRepository creditOfferRepository;
 
-  private final Logger logger = LoggerFactory.getLogger(CreditService.class);
+  public void saveCreditOfferToDb(CreditOffer creditOffer) {
+    creditOfferRepository.save(creditOffer);
+  }
+
+  public CreditOffer getCreditOfferByOfferId(String offerId) {
+    return creditOfferRepository.findByOfferId(offerId).orElseThrow();
+  }
 }

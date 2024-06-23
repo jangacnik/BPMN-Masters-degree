@@ -1,8 +1,6 @@
 package com.mag.bpm.services;
 
-import static com.mag.bpm.commons.CreditProcessVariables.CREDIT_OFFER_STRING;
 import static com.mag.bpm.commons.CreditProcessVariables.CREDIT_OFFER_VARIABLE;
-import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENTS_STRING;
 import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_METADATA_LIST_VARIABLE;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,31 +11,41 @@ import com.mag.bpm.models.documents.DocumentMetadata;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class CreditProcessService {
 
   private final ObjectMapper objectMapper;
 
   private final RuntimeService runtimeService;
-  private final Logger logger = LoggerFactory.getLogger(CreditProcessService.class);
+  private final CreditService creditService;
+  private final DocumentService documentService;
 
   public void startCreditProcess(CreditRequestDto creditRequestDto) throws JsonProcessingException {
     Map<String, Object> variables = new HashMap<String, Object>();
-    variables.put("offerId", creditRequestDto.getCreditOffer().getOfferId());
-    variables.put(CREDIT_OFFER_STRING,
-        objectMapper.writeValueAsString(creditRequestDto.getCreditOffer()));
-    variables.put(DOCUMENTS_STRING,
-        objectMapper.writeValueAsString(creditRequestDto.getDocumentMetadataList()));
-    runtimeService.startProcessInstanceByKey("pdCreditRequest",
-        creditRequestDto.getCreditOffer().getOfferId(), variables);
+    String offerId = creditRequestDto.getCreditOffer().getOfferId();
+    if (StringUtils.isBlank(offerId)) {
+      offerId = UUID.randomUUID().toString();
+      creditRequestDto.getCreditOffer().setOfferId(offerId);
+    }
+    // assign
+    for (DocumentMetadata documentMetadata : creditRequestDto.getDocumentMetadataList()) {
+      documentMetadata.setOfferId(offerId);
+    }
+
+    documentService.saveDocumentsToDb(creditRequestDto.getDocumentMetadataList());
+    creditService.saveCreditOfferToDb(creditRequestDto.getCreditOffer());
+    runtimeService.startProcessInstanceByKey(
+        "pdCreditRequest", creditRequestDto.getCreditOffer().getOfferId(), variables);
   }
 
   public void sendMissingDocumentsReceivedMessage(String instanceId) {
@@ -47,22 +55,19 @@ public class CreditProcessService {
         .correlateWithResult();
   }
 
-  public CreditOffer getCreditOfferProcessVariable(String executionId)
-      throws JsonProcessingException {
-    return (CreditOffer) runtimeService.getVariableTyped(executionId, CREDIT_OFFER_VARIABLE)
-        .getValue();
+  public CreditOffer getCreditOfferProcessVariable(String executionId) {
+    return (CreditOffer)
+        runtimeService.getVariableTyped(executionId, CREDIT_OFFER_VARIABLE).getValue();
   }
 
-  public List<DocumentMetadata> getDocumentMetadataListProcessVariable(
-      String executionId)
-      throws JsonProcessingException {
-    return (List<DocumentMetadata>) runtimeService.getVariableTyped(executionId, DOCUMENT_METADATA_LIST_VARIABLE)
-        .getValue();
+  public List<DocumentMetadata> getDocumentMetadataListProcessVariable(String executionId) {
+    return (List<DocumentMetadata>)
+        runtimeService.getVariableTyped(executionId, DOCUMENT_METADATA_LIST_VARIABLE).getValue();
   }
 
   public boolean getBooleanProcessVariable(DelegateExecution delegateExecution, String variableName)
       throws JsonProcessingException {
-    return objectMapper.readValue(delegateExecution.getVariable(variableName).toString(),
-        Boolean.class);
+    return objectMapper.readValue(
+        delegateExecution.getVariable(variableName).toString(), Boolean.class);
   }
 }

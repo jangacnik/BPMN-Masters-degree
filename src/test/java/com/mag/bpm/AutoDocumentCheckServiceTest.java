@@ -7,7 +7,6 @@ import com.mag.bpm.models.CreditObject;
 import com.mag.bpm.models.documents.DocumentMetadata;
 import com.mag.bpm.models.enums.ObjectType;
 import com.mag.bpm.services.AutoDocumentCheckService;
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +45,7 @@ public class AutoDocumentCheckServiceTest {
             43600.0,
             35.760,
             0.22,
-            LocalDateTime.now());
+            LocalDateTime.now().toString());
     assertTrue(
         autoDocumentCheckService.autoCheckDocument(
             checkProperties, creditObject, documentMetadata));
@@ -78,7 +77,7 @@ public class AutoDocumentCheckServiceTest {
             43600.0,
             35.760,
             0.22,
-            LocalDateTime.now());
+            LocalDateTime.now().toString());
     assertFalse(
         autoDocumentCheckService.autoCheckDocument(
             checkProperties, creditObject, documentMetadata));
