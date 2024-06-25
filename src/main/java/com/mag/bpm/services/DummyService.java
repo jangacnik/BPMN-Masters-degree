@@ -77,12 +77,12 @@ public class DummyService {
   private static final Integer DURATION_MAX = 240;
   private static final Integer REQUESTED_PAYOUT_DATE_MIN = 7;
   private static final Integer REQUESTED_PAYOUT_DATE_MAX = 31;
-  private List<OccupationType> occupationTypes;
-  private List<LivingSituation> livingSituations;
-  private List<ObjectType> objectTypes;
-  private List<DocumentCode> documentCodes;
-  private List<OfferType> offerTypes;
-  private List<DocumentOrigin> documentOrigins;
+  private final List<OccupationType> occupationTypes;
+  private final List<LivingSituation> livingSituations;
+  private final List<ObjectType> objectTypes;
+  private final List<DocumentCode> documentCodes;
+  private final List<OfferType> offerTypes;
+  private final List<DocumentOrigin> documentOrigins;
   private final ObjectMapper objectMapper;
 
   DummyService() {
@@ -119,7 +119,19 @@ public class DummyService {
     } else {
       createDocumentsRandom(documentMetadataList, creditOffer, numberOfDocuments);
     }
+    int cCount = 0;
+    for (DocumentMetadata documentMetadata : documentMetadataList) {
+      if (documentMetadata.getDocumentCode().equals(DocumentCode.ID)
+          || documentMetadata.getDocumentCode().equals(DocumentCode.PASSPORT)) {
+        documentMetadata.getMetadata().put("creditor", String.valueOf(cCount));
+        cCount++;
+      }
+      if (documentMetadata.getDocumentCode().equals(DocumentCode.PAYSLIP)) {
+        documentMetadata.getMetadata().put("creditor", "0");
+      }
+    }
     creditRequestDto.setDocumentMetadataList(documentMetadataList);
+
     return creditRequestDto;
   }
 
@@ -187,10 +199,10 @@ public class DummyService {
     Person person = fairy.person();
     Double income = fairy.baseProducer().randomBetween(INCOME_MIN, INCOME_MAX);
     Double extraIncome = fairy.baseProducer().randomBetween(EXTRA_INCOME_MIN, EXTRA_INCOME_MAX);
-    Double totalIncome = income + extraIncome;
+    double totalIncome = income + extraIncome;
 
     LivingSituation livingSituation = fairy.baseProducer().randomElement(livingSituations);
-    Double lease = 0.0;
+    double lease = 0.0;
     if (livingSituation.equals(LivingSituation.LEASE)
         || livingSituation.equals(LivingSituation.SHARED_LEASE)) {
       lease = income / 3.3;
@@ -227,8 +239,8 @@ public class DummyService {
 
   private CreditObject createCreditObject() {
     Fairy fairy = Fairy.create();
-    Double totalPrice = fairy.baseProducer().randomBetween(TOTAL_PRICE_MIN, TOTAL_PRICE_MAX);
-    Double vat = fairy.baseProducer().randomBetween(VAT_MIN, VAT_MAX);
+    double totalPrice = fairy.baseProducer().randomBetween(TOTAL_PRICE_MIN, TOTAL_PRICE_MAX);
+    double vat = fairy.baseProducer().randomBetween(VAT_MIN, VAT_MAX);
     LocalDateTime localDateTime = LocalDateTime.now();
     long daysSincePurchase = fairy.baseProducer().randomBetween(0, 10);
     return new CreditObject(
@@ -275,7 +287,7 @@ public class DummyService {
     }
     Map<String, String> metadata = new HashMap<>();
     Map<String, String> creditObj =
-        objectMapper.convertValue(creditData, new TypeReference<Map<String, String>>() {});
+        objectMapper.convertValue(creditData, new TypeReference<>() {});
     for (String property : properties) {
       try {
         metadata.put(property, creditObj.get(property));

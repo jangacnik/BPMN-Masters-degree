@@ -12,8 +12,9 @@ public class InitDecideDocumentCheckListener implements ExecutionListener {
 
   @Override
   public void notify(DelegateExecution delegateExecution) throws Exception {
-    DocumentMetadata documentMetadata = (DocumentMetadata) delegateExecution.getVariableTyped("document").getValue();
-    String t = documentMetadata.getDocumentCode().getValue();
-    delegateExecution.setVariableLocal("documentCode", documentMetadata.getDocumentCode().getValue());
+    DocumentMetadata documentMetadata =
+        (DocumentMetadata) delegateExecution.getVariableTyped("document").getValue();
+    delegateExecution.setVariableLocal(
+        "documentCode", documentMetadata.getDocumentCode().getValue());
   }
 }
