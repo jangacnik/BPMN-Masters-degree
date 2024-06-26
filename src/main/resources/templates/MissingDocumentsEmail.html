@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div>
+  <div>
+    <span th:text="${'Dear ' + customer}"></span>
+    <br><br>
+    <span>Thank you for your credit request.</span>
+    <br>
+    <span>Our automated credit system noticed that your request </span>
+    <b th:text="${offerId}"></b>
+      <span> is missing some of the required documents.</span>
+  </div><br>
+  <h3>Please send the below documents for your credit request:</h3>
+  <ul>
+    <li th:each="doc : ${missingDocuments}">
+        <span th:text="${doc}"></span>
+    </li>
+  </ul>
+  <br>
+  <div>
+    <span>Kind regards,</span>
+    <br>
+    <span>Your Chosen Bank provider</span>
+  </div>
+</div>
+</body>
+</html>

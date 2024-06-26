@@ -1,5 +1,12 @@
 package com.mag.bpm.services.tasks;
 
+import static com.mag.bpm.commons.CreditProcessConstants.CREDITOR_1_NUMBER;
+import static com.mag.bpm.commons.CreditProcessConstants.CREDITOR_2_NUMBER;
+import static com.mag.bpm.commons.CreditProcessConstants.CREDITOR_METADATA_VARIABLE_NAME;
+import static com.mag.bpm.commons.CreditProcessVariables.MISSING_DOCUMENTS_LIST_VARIABLE;
+import static com.mag.bpm.commons.CreditProcessVariables.MISSING_DOCUMENTS_RETRY_VARIABLE;
+import static com.mag.bpm.commons.CreditProcessVariables.MISSING_DOCUMENTS_VARIABLE;
+
 import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.documents.DocumentMetadata;
 import com.mag.bpm.models.documents.MissingDocument;
@@ -46,7 +53,7 @@ public class CheckMissingDocuments implements JavaDelegate {
         .noneMatch(
             documentMetadata ->
                 requiredIdDocuments.contains(documentMetadata.getDocumentCode())
-                    && documentMetadata.getMetadata().get("creditor").equals("0"))) {
+                    && documentMetadata.getMetadata().get(CREDITOR_METADATA_VARIABLE_NAME).equals(CREDITOR_1_NUMBER))) {
       missingDocumentList.add(new MissingDocument(requiredIdDocuments, CreditorNumber.CREDITOR1));
     }
     // check if ID document of creditor 2 exists
@@ -55,7 +62,7 @@ public class CheckMissingDocuments implements JavaDelegate {
             .noneMatch(
                 documentMetadata ->
                     requiredIdDocuments.contains(documentMetadata.getDocumentCode())
-                        && documentMetadata.getMetadata().get("creditor").equals("1"))) {
+                        && documentMetadata.getMetadata().get(CREDITOR_METADATA_VARIABLE_NAME).equals(CREDITOR_2_NUMBER))) {
       missingDocumentList.add(new MissingDocument(requiredIdDocuments, CreditorNumber.CREDITOR2));
     }
 
@@ -63,7 +70,7 @@ public class CheckMissingDocuments implements JavaDelegate {
         .noneMatch(
             documentMetadata ->
                 requiredCreditorDocuments.contains(documentMetadata.getDocumentCode())
-                    && documentMetadata.getMetadata().get("creditor").equals("0"))) {
+                    && documentMetadata.getMetadata().get(CREDITOR_METADATA_VARIABLE_NAME).equals(CREDITOR_1_NUMBER))) {
       missingDocumentList.add(
           new MissingDocument(requiredCreditorDocuments, CreditorNumber.CREDITOR1));
     }
@@ -83,16 +90,16 @@ public class CheckMissingDocuments implements JavaDelegate {
     }
 
     Integer missingDocumentsRetry =
-        (Integer) delegateExecution.getVariable("missingDocumentsRetry");
+        (Integer) delegateExecution.getVariable(MISSING_DOCUMENTS_RETRY_VARIABLE);
     if (missingDocumentsRetry != null) missingDocumentsRetry++;
     else missingDocumentsRetry = 0;
-    delegateExecution.setVariable("missingDocumentsRetry", missingDocumentsRetry);
+    delegateExecution.setVariable(MISSING_DOCUMENTS_RETRY_VARIABLE, missingDocumentsRetry);
     if (!missingDocumentList.isEmpty()) {
       ObjectValue missingDocumentListTyped =
           Variables.objectValue(missingDocumentList)
               .serializationDataFormat(Variables.SerializationDataFormats.JAVA)
               .create();
-      delegateExecution.setVariable("missingDocumentList", missingDocumentListTyped);
+      delegateExecution.setVariable(MISSING_DOCUMENTS_LIST_VARIABLE, missingDocumentListTyped);
       for (MissingDocument miss : missingDocumentList) {
         log.warn(
             "Missing document with code(s) {} for creditor {}",
@@ -100,7 +107,7 @@ public class CheckMissingDocuments implements JavaDelegate {
             miss.getCreditorNumber());
       }
     }
-    delegateExecution.setVariable("missingDocuments", !missingDocumentList.isEmpty());
+    delegateExecution.setVariable(MISSING_DOCUMENTS_VARIABLE, !missingDocumentList.isEmpty());
     Map<String, Object> t = delegateExecution.getVariables();
 
     log.warn(t.toString());

@@ -132,6 +132,28 @@
       <artifactId>podam</artifactId>
       <version>8.0.1.RELEASE</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf</artifactId>
+      <version>3.1.2.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>3.1.2.RELEASE</version>
+    </dependency>
+    <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    <version>2.5.6</version>
+  </dependency>
+
+    <dependency>
+      <artifactId>jasypt-spring-boot-starter</artifactId>
+      <groupId>com.github.ulisesbocchio</groupId>
+      <version>3.0.5</version>
+    </dependency>
   </dependencies>
 
 
@@ -149,6 +171,16 @@
             </exclude>
           </excludes>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.1.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>jasypt-maven-plugin</artifactId>
+        <groupId>com.github.ulisesbocchio</groupId>
+        <version>3.0.5</version>
       </plugin>
     </plugins>
   </build>

@@ -31,6 +31,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DummyService {
+
+
+  @Value("${spring.mail.username}")
+  private String email;
+
   @Value("#{'${com.mag.bpm.metadata.check.variables.credit.offer}'.split(',')}")
   private List<String> checkPropertiesCreditOffer;
 
@@ -226,7 +231,7 @@ public class DummyService {
         person.getAddress().getCity(),
         fairy.baseProducer().randomElement(countries),
         fairy.baseProducer().randomElement(occupations),
-        person.getEmail(),
+        email,
         person.getTelephoneNumber(),
         person.getNationalIdentificationNumber(),
         fairy.baseProducer().randomElement(occupationTypes),
