@@ -17,7 +17,7 @@ public class DocumentService {
     documentMetadataRepository.saveAll(metadataList);
   }
 
-  public List<DocumentMetadata> getDocumentsByOfferId(String offerId) {
+  public List<DocumentMetadata> getDocumentsByBusinessKey(String offerId) {
      return documentMetadataRepository.findAllByOfferId(offerId).orElseThrow();
   }
 }

@@ -167,7 +167,7 @@ public class DummyService {
         break;
       case PASSPORT:
         properties = checkPropertiesId;
-        creditData = creditOffer.getCreditor1();
+        creditData = creditOffer.getCreditor2();
         break;
       case BILL:
         properties = checkPropertiesBilling;
@@ -192,10 +192,12 @@ public class DummyService {
     long daysSinceCreation = fairy.baseProducer().randomBetween(0, 100);
     return new DocumentMetadata(
         createRandomUuidString(),
+        documentCode.getValue(),
         documentCode,
         createMetadataDummy(properties, creditData),
         LocalDateTime.now().minusDays(daysSinceCreation).toString(),
         fairy.baseProducer().randomElement(documentOrigins),
+        StringUtils.EMPTY,
         StringUtils.EMPTY);
   }
 

@@ -21,9 +21,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class DocumentMetadata implements Serializable {
   @Id
   private String documentId;
+  private String description;
   private DocumentCode documentCode;
   private Map<String, String> metadata;
   private String creationDate;
   private DocumentOrigin origin;
   private String offerId;
+  private String check;
 }

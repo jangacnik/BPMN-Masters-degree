@@ -1,19 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0yyqaig" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.24.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
   <decision id="dtCheckPayoutType" name="Check Payout Type" camunda:historyTimeToLive="365">
-    <decisionTable id="DecisionTable_1gwkqoi">
-      <input id="Input_1">
-        <inputExpression id="InputExpression_1" typeRef="string">
-          <text></text>
+    <decisionTable id="DecisionTable_1gwkqoi" hitPolicy="FIRST">
+      <input id="Input_1" camunda:inputVariable="creditAmount">
+        <inputExpression id="InputExpression_1" typeRef="double">
+          <text>creditAmount</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_04j1z8q" camunda:inputVariable="typeOfCredit">
+        <inputExpression id="LiteralExpression_11r7dqv" typeRef="string">
+          <text>typeOfCredit</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0fpmark" camunda:inputVariable="allDocumentsChecked">
+        <inputExpression id="LiteralExpression_076ets5" typeRef="boolean">
+          <text>allDocumentsChecked</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0rchqoz" camunda:inputVariable="creditScore">
+        <inputExpression id="LiteralExpression_0ld6mt0" typeRef="double">
+          <text>creditScore</text>
         </inputExpression>
       </input>
       <output id="Output_1" label="payoutType" name="payoutType" typeRef="string" />
       <rule id="DecisionRule_0p7n73x">
         <inputEntry id="UnaryTests_1o350ja">
+          <text>&lt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xhyydt">
+          <text>"QUICK"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zar7hw">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15iptji">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0lg6yzd">
           <text>"AUTO"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0o9zsta">
+        <inputEntry id="UnaryTests_0lo7708">
+          <text>&lt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13jz5rm">
+          <text>"ONLINE"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uf0wlk">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hdjubh">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kgch48">
+          <text>"AUTO"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0it5xip">
+        <inputEntry id="UnaryTests_01xflmf">
+          <text>&lt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i6g3la">
+          <text>"ONLINE"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w4nzdw">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1txdksz">
+          <text>&gt;= 7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fgg9q8">
+          <text>"AUTO"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0mnmkjy">
+        <inputEntry id="UnaryTests_04cfpm0">
+          <text>&lt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0adf01m">
+          <text>"QUICK"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ssqzsk">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mzueb7">
+          <text>&gt;= 7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1d8drcj">
+          <text>"AUTO"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_102xdjw">
+        <inputEntry id="UnaryTests_1a40duu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ptvfm3">
+          <text>"AUTOMOTIVE"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11trwnf">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rfw4re">
+          <text>&gt; 7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06joo8p">
+          <text>"AUTO"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1y3zn5c">
+        <inputEntry id="UnaryTests_06nbs77">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cyvqlk">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qdet1p">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ci0ocx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12jvcky">
+          <text>"MANUAL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ixcdcb">
+        <inputEntry id="UnaryTests_0kmeo6r">
+          <text>&gt; 75000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rhacin">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ilogq2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yvi48p">
+          <text>&lt; 5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_008y9cx">
+          <text>"DECLINED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_085a21n">
+        <inputEntry id="UnaryTests_07m9wem">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1benwrp">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11xzi76">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13oubeu">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kuupth">
+          <text>"MANUAL"</text>
         </outputEntry>
       </rule>
     </decisionTable>

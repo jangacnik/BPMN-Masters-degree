@@ -15,6 +15,7 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +23,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Log4j2
 public class InitOfferData implements JavaDelegate {
-
-  private final ObjectMapper objectMapper;
-
-  private final RuntimeService runtimeService;
 
   private final DocumentService documentService;
   private final CreditService creditService;
@@ -35,12 +32,12 @@ public class InitOfferData implements JavaDelegate {
     String offerId = delegateExecution.getProcessBusinessKey();
     CreditOffer creditOffer = creditService.getCreditOfferByOfferId(offerId);
     ObjectValue creditOfferTyped = Variables.objectValue(creditOffer)
-        .serializationDataFormat(Variables.SerializationDataFormats.JAVA)
+        .serializationDataFormat(Variables.SerializationDataFormats.JSON)
         .create();
 
-    List<DocumentMetadata> documentMetadataList = documentService.getDocumentsByOfferId(offerId);
+    List<DocumentMetadata> documentMetadataList = documentService.getDocumentsByBusinessKey(offerId);
     ObjectValue documentMetadataListTyped = Variables.objectValue(documentMetadataList)
-        .serializationDataFormat(Variables.SerializationDataFormats.JAVA)
+        .serializationDataFormat(SerializationDataFormats.JSON)
         .create();
 
     delegateExecution.setVariable(CREDIT_OFFER_VARIABLE, creditOfferTyped);

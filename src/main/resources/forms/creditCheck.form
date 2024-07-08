@@ -1,0 +1,124 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "label": "Document",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_02p4szb",
+            "columns": null
+          },
+          "id": "Field_0v4nxlg",
+          "key": "description",
+          "properties": {},
+          "readonly": true
+        },
+        {
+          "values": [
+            {
+              "label": "Checked",
+              "value": "CHECKED"
+            },
+            {
+              "label": "Unchecked",
+              "value": "UNCHECKED"
+            },
+            {
+              "label": "Irrelevant",
+              "value": "IRRELEVANT"
+            },
+            {
+              "label": "Auto-checked",
+              "value": "AUTOCHECKED"
+            }
+          ],
+          "label": "Checked",
+          "type": "select",
+          "layout": {
+            "row": "Row_02p4szb",
+            "columns": null
+          },
+          "id": "Field_0ii3i6t",
+          "key": "check",
+          "defaultValue": "unchecked"
+        }
+      ],
+      "showOutline": true,
+      "isRepeating": true,
+      "allowAddRemove": false,
+      "defaultRepetitions": 1,
+      "label": "Document list:",
+      "type": "dynamiclist",
+      "layout": {
+        "row": "Row_09hlz1u",
+        "columns": null
+      },
+      "id": "Field_0ft5vmj",
+      "path": "documentMetadataList",
+      "disableCollapse": true,
+      "verticalAlignment": "center"
+    },
+    {
+      "components": [
+        {
+          "label": "Check description",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0svshy7",
+            "columns": null
+          },
+          "id": "Field_0o5uqmt",
+          "key": "description"
+        },
+        {
+          "values": [
+            {
+              "label": "Fullfilled",
+              "value": "FULLFILLED"
+            },
+            {
+              "label": "Not required",
+              "value": "NOT_REQUIRED"
+            },
+            {
+              "label": "Unchecked",
+              "value": "UNCHECKED"
+            }
+          ],
+          "label": "Status",
+          "type": "select",
+          "layout": {
+            "row": "Row_0svshy7",
+            "columns": null
+          },
+          "id": "Field_0uhq7n6",
+          "key": "status",
+          "defaultValue": "UNCHECKED"
+        }
+      ],
+      "showOutline": true,
+      "isRepeating": true,
+      "allowAddRemove": true,
+      "defaultRepetitions": 1,
+      "label": "Credit check list:",
+      "type": "dynamiclist",
+      "layout": {
+        "row": "Row_100h3dj",
+        "columns": null
+      },
+      "id": "Field_175zbdq",
+      "path": "creditChecks",
+      "disableCollapse": true
+    }
+  ],
+  "type": "default",
+  "id": "CreditCheckForm",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.24.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.21.0",
+  "schemaVersion": 16
+}
