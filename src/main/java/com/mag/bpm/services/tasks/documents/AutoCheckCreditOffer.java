@@ -41,9 +41,11 @@ public class AutoCheckCreditOffer  implements JavaDelegate {
 
     if (autoChecked) {
       List<String> autoCheckedDocument =
-          (List<String>) delegateExecution.getVariableTyped("checkedDocumentIds").getValue();
+          Spin.JSON(delegateExecution.getVariableTyped("checkedDocumentIds").getValue())
+              .mapTo("java.util.ArrayList<java.lang.String>");
       autoCheckedDocument.add(documentMetadata.getDocumentId());
-      delegateExecution.setVariableLocal("checkedDocumentIds", autoCheckedDocument);
+      delegateExecution.setVariable(
+          "checkedDocumentIds", Spin.JSON(autoCheckedDocument).toString());
     }
   }
 }

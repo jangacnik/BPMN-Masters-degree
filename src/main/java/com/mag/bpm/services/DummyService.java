@@ -197,8 +197,7 @@ public class DummyService {
         LocalDateTime.now().minusDays(daysSinceCreation).toString(),
         fairy.baseProducer().randomElement(documentOrigins),
         StringUtils.EMPTY,
-        StringUtils.EMPTY,
-        false);
+        StringUtils.EMPTY);
   }
 
   private Creditor createDummyCreditor() {

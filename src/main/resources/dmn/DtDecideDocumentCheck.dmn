@@ -7,10 +7,29 @@
           <text>documentCode</text>
         </inputExpression>
       </input>
+      <input id="InputClause_0c1nrqz" label="alreadyChecked" camunda:inputVariable="alreadyChecked">
+        <inputExpression id="LiteralExpression_1lhg10o" typeRef="boolean">
+          <text>alreadyChecked</text>
+        </inputExpression>
+      </input>
       <output id="Output_1" label="documentCheck" name="documentCheck" typeRef="string" />
+      <rule id="DecisionRule_13kt7vv">
+        <inputEntry id="UnaryTests_0k2tt43">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00plhw1">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jbcbpy">
+          <text>"SKIP"</text>
+        </outputEntry>
+      </rule>
       <rule id="DecisionRule_028rgid">
         <inputEntry id="UnaryTests_0rj4s50">
           <text>"IDC100"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_098a75c">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1bzc6kh">
           <text>"IDENTIFICATION"</text>
@@ -20,6 +39,9 @@
         <inputEntry id="UnaryTests_1gwj14p">
           <text>"IDC200"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0tnm1s2">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_00ksafc">
           <text>"IDENTIFICATION"</text>
         </outputEntry>
@@ -27,6 +49,9 @@
       <rule id="DecisionRule_19er7no">
         <inputEntry id="UnaryTests_0dy3l2c">
           <text>"PSD100"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wssyyy">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_15851rj">
           <text>"INCOME"</text>
@@ -36,6 +61,9 @@
         <inputEntry id="UnaryTests_1kfmvxf">
           <text>"COD100"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0rskhm5">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_01ceelm">
           <text>"CREDIT_OFFER"</text>
         </outputEntry>
@@ -43,6 +71,9 @@
       <rule id="DecisionRule_040jjn5">
         <inputEntry id="UnaryTests_1x2dpzu">
           <text>"SAD100"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c6jz6u">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0esmi91">
           <text>"SALES_AGREEMENT"</text>
@@ -52,6 +83,9 @@
         <inputEntry id="UnaryTests_03o4m5i">
           <text>"BLL100"</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1cak35c">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1yzaa7l">
           <text>"BILLING"</text>
         </outputEntry>
@@ -60,8 +94,11 @@
         <inputEntry id="UnaryTests_0wy5hp2">
           <text></text>
         </inputEntry>
+        <inputEntry id="UnaryTests_08q0gqe">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0b01hvt">
-          <text>"OTHER"</text>
+          <text>"SKIP"</text>
         </outputEntry>
       </rule>
     </decisionTable>

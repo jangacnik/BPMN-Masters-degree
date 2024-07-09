@@ -27,9 +27,11 @@ public class AutoCheckSalesAgreement implements JavaDelegate {
   @Override
   public void execute(DelegateExecution delegateExecution) throws Exception {
     DocumentMetadata documentMetadata =
-        Spin.JSON(delegateExecution.getVariableTyped("document").getValue()).mapTo(DocumentMetadata.class);
+        Spin.JSON(delegateExecution.getVariableTyped("document").getValue())
+            .mapTo(DocumentMetadata.class);
     CreditOffer creditOffer =
-        Spin.JSON(delegateExecution.getVariableTyped(CREDIT_OFFER_VARIABLE).getValue()).mapTo(CreditOffer.class);
+        Spin.JSON(delegateExecution.getVariableTyped(CREDIT_OFFER_VARIABLE).getValue())
+            .mapTo(CreditOffer.class);
     boolean autoChecked =
         autoDocumentCheckService.autoCheckDocument(
             checkProperties, creditOffer.getObject(), documentMetadata);
@@ -41,9 +43,11 @@ public class AutoCheckSalesAgreement implements JavaDelegate {
 
     if (autoChecked) {
       List<String> autoCheckedDocument =
-          (List<String>) delegateExecution.getVariableTyped("checkedDocumentIds").getValue();
+          Spin.JSON(delegateExecution.getVariableTyped("checkedDocumentIds").getValue())
+              .mapTo("java.util.ArrayList<java.lang.String>");
       autoCheckedDocument.add(documentMetadata.getDocumentId());
-      delegateExecution.setVariableLocal("checkedDocumentIds", autoCheckedDocument);
+      delegateExecution.setVariable(
+          "checkedDocumentIds", Spin.JSON(autoCheckedDocument).toString());
     }
   }
 }
