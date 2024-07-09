@@ -7,7 +7,6 @@ import com.mag.bpm.models.documents.DocumentMetadata;
 import com.mag.bpm.services.DocumentService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.Variables;
@@ -27,7 +26,7 @@ public class UpdateDocumentServiceTask implements JavaDelegate {
 
     ObjectValue documentMetadataListTyped =
         Variables.objectValue(documentMetadataList)
-            .serializationDataFormat(Variables.SerializationDataFormats.JAVA)
+            .serializationDataFormat(Variables.SerializationDataFormats.JSON)
             .create();
     delegateExecution.setVariable(MISSING_DOCUMENTS_RECEIVED_VARIABLE, true);
     delegateExecution.setVariable(DOCUMENT_METADATA_LIST_VARIABLE, documentMetadataListTyped);

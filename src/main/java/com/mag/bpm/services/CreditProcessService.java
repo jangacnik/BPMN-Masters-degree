@@ -21,7 +21,9 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
+import org.camunda.spin.Spin;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -75,8 +77,9 @@ public class CreditProcessService {
 
       ObjectValue documentMetadataListTyped =
           Variables.objectValue(documentMetadataList)
-              .serializationDataFormat(Variables.SerializationDataFormats.JAVA)
+              .serializationDataFormat(SerializationDataFormats.JSON)
               .create();
+
       runtimeService.setVariable(processInstanceId, MISSING_DOCUMENTS_RECEIVED_VARIABLE, true);
       runtimeService.setVariable(
           processInstanceId, DOCUMENT_METADATA_LIST_VARIABLE, documentMetadataListTyped);
@@ -89,13 +92,16 @@ public class CreditProcessService {
   }
 
   public CreditOffer getCreditOfferProcessVariable(String executionId) {
-    return (CreditOffer)
-        runtimeService.getVariableTyped(executionId, CREDIT_OFFER_VARIABLE).getValue();
+    return Spin.JSON(runtimeService.getVariableTyped(executionId, CREDIT_OFFER_VARIABLE).getValue())
+        .mapTo(CreditOffer.class);
   }
 
   public List<DocumentMetadata> getDocumentMetadataListProcessVariable(String executionId) {
-    return (List<DocumentMetadata>)
-        runtimeService.getVariableTyped(executionId, DOCUMENT_METADATA_LIST_VARIABLE).getValue();
+    return Spin.JSON(
+            runtimeService
+                .getVariableTyped(executionId, DOCUMENT_METADATA_LIST_VARIABLE)
+                .getValue())
+        .mapTo("java.util.ArrayList<com.mag.bpm.models.documents.DocumentMetadata>");
   }
 
   public boolean getBooleanProcessVariable(DelegateExecution delegateExecution, String variableName)

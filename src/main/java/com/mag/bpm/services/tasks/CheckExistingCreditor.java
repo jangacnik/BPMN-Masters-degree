@@ -4,7 +4,6 @@ import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.documents.DocumentMetadata;
 import com.mag.bpm.services.CreditProcessService;
 import com.mag.bpm.services.CreditorService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -38,11 +37,5 @@ public class CheckExistingCreditor implements JavaDelegate {
         creditorExists1, creditorExists2, delegateExecution.getBusinessKey());
     delegateExecution.setVariable("existingCustomer1", creditorExists1);
     delegateExecution.setVariable("existingCustomer2", creditorExists2);
-
-    List<String> test = new ArrayList<>();
-    for (DocumentMetadata documentMetadata : documentMetadataList) {
-      test.add(documentMetadata.getDocumentId());
-    }
-    delegateExecution.setVariable("documentIds", test);
   }
 }
