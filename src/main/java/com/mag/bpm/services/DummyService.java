@@ -91,7 +91,6 @@ public class DummyService {
   private final ObjectMapper objectMapper;
 
   DummyService() {
-    //    fairy = Fairy.create();
     occupationTypes = Arrays.asList(OccupationType.values());
     livingSituations = Arrays.asList(LivingSituation.values());
     objectTypes = Arrays.asList(ObjectType.values());
@@ -198,7 +197,8 @@ public class DummyService {
         LocalDateTime.now().minusDays(daysSinceCreation).toString(),
         fairy.baseProducer().randomElement(documentOrigins),
         StringUtils.EMPTY,
-        StringUtils.EMPTY);
+        StringUtils.EMPTY,
+        false);
   }
 
   private Creditor createDummyCreditor() {

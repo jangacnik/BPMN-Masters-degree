@@ -28,4 +28,5 @@ public class DocumentMetadata implements Serializable {
   private DocumentOrigin origin;
   private String offerId;
   private String check;
+  private boolean alreadyChecked;
 }

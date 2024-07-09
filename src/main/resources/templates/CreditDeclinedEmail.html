@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div>
+  <div>
+    <span th:text="${'Dear ' + customer}"></span>
+    <br><br>
+    <span>Thank you for your credit request.</span>
+    <br>
+    <span>We are sad to inform you that your credit request </span>
+    <b th:text="${offerId}"></b>
+    <span> of </span>
+    <b th:text="${creditSum}"></b>
+    <span> was declined.</span>
+  </div>
+  <br>
+  <br>
+  <div>
+    <span>Kind regards,</span>
+    <br>
+    <span>Your Chosen Bank provider</span>
+  </div>
+</div>
+</body>
+</html>

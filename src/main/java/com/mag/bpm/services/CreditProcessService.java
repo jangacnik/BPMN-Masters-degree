@@ -10,9 +10,7 @@ import com.mag.bpm.dto.CreditRequestDto;
 import com.mag.bpm.dto.DocumentMetadataUploadDto;
 import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.documents.DocumentMetadata;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -38,8 +36,7 @@ public class CreditProcessService {
   private final CreditService creditService;
   private final DocumentService documentService;
 
-  public void startCreditProcess(CreditRequestDto creditRequestDto) throws JsonProcessingException {
-    Map<String, Object> variables = new HashMap<String, Object>();
+  public void startCreditProcess(CreditRequestDto creditRequestDto) {
     String offerId = creditRequestDto.getCreditOffer().getOfferId();
     if (StringUtils.isBlank(offerId)) {
       offerId = UUID.randomUUID().toString();
@@ -53,7 +50,7 @@ public class CreditProcessService {
     documentService.saveDocumentsToDb(creditRequestDto.getDocumentMetadataList());
     creditService.saveCreditOfferToDb(creditRequestDto.getCreditOffer());
     runtimeService.startProcessInstanceByKey(
-        "pdCreditRequest", creditRequestDto.getCreditOffer().getOfferId(), variables);
+        "pdCreditRequest", creditRequestDto.getCreditOffer().getOfferId());
   }
 
   public void sendMissingDocumentsReceivedMessage(DocumentMetadataUploadDto documentDto) {

@@ -24,7 +24,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class CreditProcessController {
 
   private final CreditProcessService creditProcessService;
-  private final PodamFactory factory = new PodamFactoryImpl();
   private final DummyService dummyService;
 
   @PostMapping
@@ -36,9 +35,6 @@ public class CreditProcessController {
 
   @GetMapping("/dummy")
   public ResponseEntity<CreditRequestDto> createDummyCreditRequest() {
-    CreditRequestDto dummyCreditRequestDto = factory.manufacturePojoWithFullData(
-        CreditRequestDto.class);
-
     return ResponseEntity.ok(dummyService.creatDummyCreditOfferDto(true, true, 0));
   }
 
