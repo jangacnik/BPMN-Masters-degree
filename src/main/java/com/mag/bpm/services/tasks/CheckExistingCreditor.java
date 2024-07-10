@@ -1,11 +1,13 @@
 package com.mag.bpm.services.tasks;
 
+import static com.mag.bpm.commons.CreditProcessVariables.EXISTING_CUSTOMER_1_VARIABLE;
+import static com.mag.bpm.commons.CreditProcessVariables.EXISTING_CUSTOMER_2_VARIABLE;
+
 import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.services.CreditProcessService;
 import com.mag.bpm.services.CreditorService;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
@@ -33,7 +35,7 @@ public class CheckExistingCreditor implements JavaDelegate {
         creditorExists1,
         creditorExists2,
         delegateExecution.getBusinessKey());
-    delegateExecution.setVariable("existingCustomer1", creditorExists1);
-    delegateExecution.setVariable("existingCustomer2", creditorExists2);
+    delegateExecution.setVariable(EXISTING_CUSTOMER_1_VARIABLE, creditorExists1);
+    delegateExecution.setVariable(EXISTING_CUSTOMER_2_VARIABLE, creditorExists2);
   }
 }

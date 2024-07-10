@@ -1,5 +1,11 @@
 package com.mag.bpm.services.tasks.documents;
 
+import static com.mag.bpm.commons.CreditProcessVariables.CHECKED_DOCUMENT_IDS_VARIABLE;
+import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_ALREADY_CHECKED;
+import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_CODE_VARIABLE;
+import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_VARIABLE;
+import static com.mag.bpm.commons.SpinMappingTypes.MAPPING_STRING_LIST;
+
 import com.mag.bpm.models.documents.DocumentMetadata;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -16,15 +22,15 @@ public class InitDecideDocumentCheckListener implements ExecutionListener {
   @Override
   public void notify(DelegateExecution delegateExecution) throws Exception {
     DocumentMetadata documentMetadata =
-        Spin.JSON(delegateExecution.getVariableTyped("document").getValue()).mapTo(DocumentMetadata.class);
+        Spin.JSON(delegateExecution.getVariableTyped(DOCUMENT_VARIABLE).getValue()).mapTo(DocumentMetadata.class);
     delegateExecution.setVariableLocal(
-        "documentCode", documentMetadata.getDocumentCode().getValue());
-    String json = delegateExecution.getVariable("checkedDocumentIds").toString();
+        DOCUMENT_CODE_VARIABLE, documentMetadata.getDocumentCode().getValue());
+    String json = delegateExecution.getVariable(CHECKED_DOCUMENT_IDS_VARIABLE).toString();
     if (StringUtils.isNotBlank(json)) {
       List<String> autoCheckedDocument =
-          Spin.JSON(json).mapTo("java.util.ArrayList<java.lang.String>");
+          Spin.JSON(json).mapTo(MAPPING_STRING_LIST);
       delegateExecution.setVariableLocal(
-          "alreadyChecked", autoCheckedDocument.contains(documentMetadata.getDocumentId()));
+          DOCUMENT_ALREADY_CHECKED, autoCheckedDocument.contains(documentMetadata.getDocumentId()));
     }
   }
 }

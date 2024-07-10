@@ -1,6 +1,5 @@
 package com.mag.bpm.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mag.bpm.dto.CreditRequestDto;
 import com.mag.bpm.dto.DocumentMetadataUploadDto;
 import com.mag.bpm.services.CreditProcessService;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @RestController
 @RequestMapping("/credit")
@@ -27,8 +24,8 @@ public class CreditProcessController {
   private final DummyService dummyService;
 
   @PostMapping
-  public ResponseEntity<Void> creditProcessReceived(@RequestBody CreditRequestDto creditRequestDto)
-      throws JsonProcessingException {
+  public ResponseEntity<Void> creditProcessReceived(
+      @RequestBody CreditRequestDto creditRequestDto) {
     creditProcessService.startCreditProcess(creditRequestDto);
     return new ResponseEntity<>(HttpStatus.OK);
   }

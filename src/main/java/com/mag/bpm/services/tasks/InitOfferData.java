@@ -1,5 +1,6 @@
 package com.mag.bpm.services.tasks;
 
+import static com.mag.bpm.commons.CreditProcessVariables.CHECKED_DOCUMENT_IDS_VARIABLE;
 import static com.mag.bpm.commons.CreditProcessVariables.CREDIT_OFFER_VARIABLE;
 import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_METADATA_LIST_VARIABLE;
 import static java.util.Collections.emptyList;
@@ -42,6 +43,6 @@ public class InitOfferData implements JavaDelegate {
 
     delegateExecution.setVariable(CREDIT_OFFER_VARIABLE, creditOfferTyped);
     delegateExecution.setVariable(DOCUMENT_METADATA_LIST_VARIABLE, documentMetadataListTyped);
-    delegateExecution.setVariable("checkedDocumentIds", Spin.JSON(emptyList()).toString());
+    delegateExecution.setVariable(CHECKED_DOCUMENT_IDS_VARIABLE, Spin.JSON(emptyList()).toString());
   }
 }

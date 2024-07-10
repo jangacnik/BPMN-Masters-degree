@@ -15,7 +15,6 @@ import com.mag.bpm.models.enums.DocumentCode;
 import com.mag.bpm.services.CreditProcessService;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -101,15 +100,12 @@ public class CheckMissingDocuments implements JavaDelegate {
               .create();
       delegateExecution.setVariable(MISSING_DOCUMENTS_LIST_VARIABLE, missingDocumentListTyped);
       for (MissingDocument miss : missingDocumentList) {
-        log.warn(
+        log.info(
             "Missing document with code(s) {} for creditor {}",
             miss.getDocumentCodes().toString(),
             miss.getCreditorNumber());
       }
     }
     delegateExecution.setVariable(MISSING_DOCUMENTS_VARIABLE, !missingDocumentList.isEmpty());
-    Map<String, Object> t = delegateExecution.getVariables();
-
-    log.warn(t.toString());
   }
 }

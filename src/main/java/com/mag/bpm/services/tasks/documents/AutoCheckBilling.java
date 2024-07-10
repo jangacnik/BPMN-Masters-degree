@@ -1,6 +1,9 @@
 package com.mag.bpm.services.tasks.documents;
 
+import static com.mag.bpm.commons.CreditProcessVariables.CHECKED_DOCUMENT_IDS_VARIABLE;
 import static com.mag.bpm.commons.CreditProcessVariables.CREDIT_OFFER_VARIABLE;
+import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_VARIABLE;
+import static com.mag.bpm.commons.SpinMappingTypes.MAPPING_STRING_LIST;
 
 import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.documents.DocumentMetadata;
@@ -28,7 +31,7 @@ public class AutoCheckBilling implements JavaDelegate {
   public void execute(DelegateExecution delegateExecution) throws Exception {
     DocumentMetadata documentMetadata =
 
-        Spin.JSON(delegateExecution.getVariableTyped("document").getValue()).mapTo(DocumentMetadata.class);
+        Spin.JSON(delegateExecution.getVariableTyped(DOCUMENT_VARIABLE).getValue()).mapTo(DocumentMetadata.class);
     CreditOffer creditOffer =
         Spin.JSON(delegateExecution.getVariableTyped(CREDIT_OFFER_VARIABLE).getValue()).mapTo(CreditOffer.class);
     boolean autoChecked =
@@ -42,12 +45,12 @@ public class AutoCheckBilling implements JavaDelegate {
 
     if (autoChecked) {
       List<String> autoCheckedDocument =
-          Spin.JSON(delegateExecution.getVariableTyped("checkedDocumentIds").getValue())
-              .mapTo("java.util.ArrayList<java.lang.String>");
+          Spin.JSON(delegateExecution.getVariableTyped(CHECKED_DOCUMENT_IDS_VARIABLE).getValue())
+              .mapTo(MAPPING_STRING_LIST);
       autoCheckedDocument.add(documentMetadata.getDocumentId());
 
       delegateExecution.setVariable(
-          "checkedDocumentIds", Spin.JSON(autoCheckedDocument).toString());
+          CHECKED_DOCUMENT_IDS_VARIABLE, Spin.JSON(autoCheckedDocument).toString());
     }
   }
 }

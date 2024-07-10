@@ -3,6 +3,7 @@ package com.mag.bpm.services;
 import static com.mag.bpm.commons.CreditProcessVariables.CREDIT_OFFER_VARIABLE;
 import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_METADATA_LIST_VARIABLE;
 import static com.mag.bpm.commons.CreditProcessVariables.MISSING_DOCUMENTS_RECEIVED_VARIABLE;
+import static com.mag.bpm.commons.SpinMappingTypes.MAPPING_DOCUMENT_LIST;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -98,7 +99,7 @@ public class CreditProcessService {
             runtimeService
                 .getVariableTyped(executionId, DOCUMENT_METADATA_LIST_VARIABLE)
                 .getValue())
-        .mapTo("java.util.ArrayList<com.mag.bpm.models.documents.DocumentMetadata>");
+        .mapTo(MAPPING_DOCUMENT_LIST);
   }
 
   public boolean getBooleanProcessVariable(DelegateExecution delegateExecution, String variableName)
