@@ -9,6 +9,6 @@ public class AutomaticPayout implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution delegateExecution) throws Exception {
-
+    // TODO document why this method is empty
   }
 }

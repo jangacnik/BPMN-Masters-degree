@@ -1,5 +1,6 @@
 package com.mag.bpm.controllers;
 
+import com.mag.bpm.dto.CreditRuleDto;
 import com.mag.bpm.models.rule.CreditRule;
 import com.mag.bpm.services.rules.CreditRuleService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,8 @@ public class CreditRulesController {
   private final CreditRuleService creditRuleService;
 
   @PostMapping()
-  public ResponseEntity<CreditRule> addRule(@RequestBody CreditRule creditRule) {
-    return ResponseEntity.ok(creditRuleService.saveOrUpdateRuleToDb(creditRule));
+  public ResponseEntity<CreditRule> addRule(@RequestBody CreditRuleDto creditRuleDto) {
+    return ResponseEntity.ok(creditRuleService.saveOrUpdateRuleToDb(creditRuleDto));
   }
 
   @DeleteMapping("/{ruleId}")
