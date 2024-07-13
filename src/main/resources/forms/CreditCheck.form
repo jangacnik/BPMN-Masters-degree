@@ -3,7 +3,30 @@
     {
       "components": [
         {
-          "label": "Document",
+          "label": "Document description",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_1b0jb7h",
+            "columns": null
+          },
+          "id": "Field_0t6yemd",
+          "key": "descripti",
+          "disabled": false,
+          "readonly": true
+        },
+        {
+          "label": "Document Id",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_05qd1c9",
+            "columns": null
+          },
+          "id": "Field_0a96vvr",
+          "key": "documentId",
+          "readonly": true
+        },
+        {
+          "label": "Document code",
           "type": "textfield",
           "layout": {
             "row": "Row_02p4szb",
@@ -12,7 +35,8 @@
           "id": "Field_0v4nxlg",
           "key": "description",
           "properties": {},
-          "readonly": true
+          "readonly": true,
+          "disabled": false
         },
         {
           "values": [
@@ -42,6 +66,15 @@
           "id": "Field_0ii3i6t",
           "key": "check",
           "defaultValue": "unchecked"
+        },
+        {
+          "label": "Separator",
+          "type": "separator",
+          "layout": {
+            "row": "Row_0y30q09",
+            "columns": null
+          },
+          "id": "Field_0tusowm"
         }
       ],
       "showOutline": true,
@@ -69,7 +102,9 @@
             "columns": null
           },
           "id": "Field_0o5uqmt",
-          "key": "description"
+          "key": "description",
+          "readonly": true,
+          "disabled": false
         },
         {
           "values": [
@@ -95,6 +130,15 @@
           "id": "Field_0uhq7n6",
           "key": "status",
           "defaultValue": "UNCHECKED"
+        },
+        {
+          "label": "Separator",
+          "type": "separator",
+          "layout": {
+            "row": "Row_0m05afg",
+            "columns": null
+          },
+          "id": "Field_0d48z1u"
         }
       ],
       "showOutline": true,

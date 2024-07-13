@@ -21,4 +21,7 @@ public final class CreditProcessVariables {
 
   public static final String EXISTING_CUSTOMER_1_VARIABLE =  "existingCustomer1";
   public static final String EXISTING_CUSTOMER_2_VARIABLE =  "existingCustomer2";
+
+  public static final String IS_CREDITOR_1_CREDIBLE = "isCreditor1Credible";
+  public static final String IS_CREDITOR_2_CREDIBLE = "isCreditor2Credible";
 }

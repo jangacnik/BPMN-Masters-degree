@@ -1,9 +1,10 @@
 package com.mag.bpm.services;
 
+import static com.mag.bpm.commons.CreditProcessEventConstants.MISSING_DOCUMENTS_RECIEVED_MSG;
 import static com.mag.bpm.commons.CreditProcessVariables.CREDIT_OFFER_VARIABLE;
 import static com.mag.bpm.commons.CreditProcessVariables.DOCUMENT_METADATA_LIST_VARIABLE;
 import static com.mag.bpm.commons.CreditProcessVariables.MISSING_DOCUMENTS_RECEIVED_VARIABLE;
-import static com.mag.bpm.commons.SpinMappingTypes.MAPPING_DOCUMENT_LIST;
+import static com.mag.bpm.commons.SpinMappingTypes.MAPPING_DOCUMENTS_LIST;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +32,6 @@ import org.springframework.stereotype.Service;
 public class CreditProcessService {
 
   private final ObjectMapper objectMapper;
-  private static final String MISSING_DOCUMENTS_RECIEVED_MSG = "Message_0d0mg9q";
 
   private final RuntimeService runtimeService;
   private final CreditService creditService;
@@ -99,7 +99,7 @@ public class CreditProcessService {
             runtimeService
                 .getVariableTyped(executionId, DOCUMENT_METADATA_LIST_VARIABLE)
                 .getValue())
-        .mapTo(MAPPING_DOCUMENT_LIST);
+        .mapTo(MAPPING_DOCUMENTS_LIST);
   }
 
   public boolean getBooleanProcessVariable(DelegateExecution delegateExecution, String variableName)

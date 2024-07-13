@@ -101,7 +101,7 @@
         <camunda:out source="checkedDocumentIds" target="checkedDocumentIds" />
         <camunda:in businessKey="#{execution.processBusinessKey}" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1imha4i</bpmn:incoming>
+      <bpmn:incoming>Flow_0orgum5</bpmn:incoming>
       <bpmn:outgoing>Flow_1172brt</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:sequenceFlow id="Flow_1172brt" sourceRef="Activity_07zs33z" targetRef="stCheckMissingDocuments" />
@@ -176,13 +176,7 @@
       </bpmn:serviceTask>
       <bpmn:sequenceFlow id="Flow_1j74viu" sourceRef="Activity_0zachnr" targetRef="Event_1nbma2t" />
     </bpmn:subProcess>
-    <bpmn:serviceTask id="stDefineCreditChecks" name="Define credit checks" camunda:class="com.mag.bpm.services.tasks.DefineCreditChecks">
-      <bpmn:extensionElements />
-      <bpmn:incoming>Flow_0orgum5</bpmn:incoming>
-      <bpmn:outgoing>Flow_1imha4i</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_0orgum5" sourceRef="Gateway_1yli5dv" targetRef="stDefineCreditChecks" />
-    <bpmn:sequenceFlow id="Flow_1imha4i" sourceRef="stDefineCreditChecks" targetRef="Activity_07zs33z" />
+    <bpmn:sequenceFlow id="Flow_0orgum5" sourceRef="Gateway_1yli5dv" targetRef="Activity_07zs33z" />
     <bpmn:boundaryEvent id="ErrorEventMailNotFound" name="Send Request error" attachedToRef="stRequestMissingDocuments">
       <bpmn:outgoing>Flow_1qlg18f</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0hez7eg" errorRef="Error_0hbist3" camunda:errorCodeVariable="ebMailNotFoundCode" camunda:errorMessageVariable="ebMailNotFoundMsgVariable" />
@@ -350,14 +344,6 @@
       <bpmndi:BPMNShape id="Event_1aop5yy_di" bpmnElement="Event_1aop5yy">
         <dc:Bounds x="1622" y="312" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_07zs33z_di" bpmnElement="Activity_07zs33z">
-        <dc:Bounds x="1310" y="487" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0acx3ov_di" bpmnElement="stCheckCreditorCredibility">
-        <dc:Bounds x="1800" y="487" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1kmpg4k_di" bpmnElement="stAutomaticPayout">
         <dc:Bounds x="2240" y="320" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -374,6 +360,14 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1m4n6ah_di" bpmnElement="stInitOfferData">
         <dc:Bounds x="234" y="487" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07zs33z_di" bpmnElement="Activity_07zs33z">
+        <dc:Bounds x="1210" y="487" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0acx3ov_di" bpmnElement="stCheckCreditorCredibility">
+        <dc:Bounds x="1760" y="487" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1gz23aw_di" bpmnElement="Activity_1gz23aw" isExpanded="true">
@@ -401,10 +395,6 @@
         <di:waypoint x="380" y="310" />
         <di:waypoint x="432" y="310" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_1m804gg_di" bpmnElement="stDefineCreditChecks">
-        <dc:Bounds x="1150" y="487" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0xjeoah_di" bpmnElement="Event_0xjeoah">
         <dc:Bounds x="1652" y="802" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -512,9 +502,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0gebr56_di" bpmnElement="Flow_0gebr56">
         <di:waypoint x="1665" y="527" />
-        <di:waypoint x="1800" y="527" />
+        <di:waypoint x="1760" y="527" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1670" y="480" width="60" height="40" />
+          <dc:Bounds x="1660" y="480" width="60" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ctrqht_di" bpmnElement="Flow_1ctrqht">
@@ -526,11 +516,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1172brt_di" bpmnElement="Flow_1172brt">
-        <di:waypoint x="1410" y="527" />
+        <di:waypoint x="1310" y="527" />
         <di:waypoint x="1460" y="527" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1glgd5u_di" bpmnElement="Flow_1glgd5u">
-        <di:waypoint x="1900" y="527" />
+        <di:waypoint x="1860" y="527" />
         <di:waypoint x="1950" y="527" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_13py4ya_di" bpmnElement="Flow_13py4ya">
@@ -581,11 +571,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0orgum5_di" bpmnElement="Flow_0orgum5">
         <di:waypoint x="1085" y="527" />
-        <di:waypoint x="1150" y="527" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1imha4i_di" bpmnElement="Flow_1imha4i">
-        <di:waypoint x="1250" y="529" />
-        <di:waypoint x="1310" y="530" />
+        <di:waypoint x="1147" y="527" />
+        <di:waypoint x="1210" y="529" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1qlg18f_di" bpmnElement="Flow_1qlg18f">
         <di:waypoint x="1560" y="758" />
