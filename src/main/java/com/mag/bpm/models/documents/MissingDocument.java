@@ -5,13 +5,13 @@ import com.mag.bpm.models.enums.DocumentCode;
 import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
-@Getter
-@Setter
+@NoArgsConstructor
 public class MissingDocument implements Serializable {
-  List<DocumentCode> documentCodes;
-  CreditorNumber creditorNumber;
+  private List<DocumentCode> documentCodes;
+  private CreditorNumber creditorNumber;
 }

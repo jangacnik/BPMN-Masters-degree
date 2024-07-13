@@ -19,8 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.variable.Variables;
-import org.camunda.bpm.engine.variable.value.ObjectValue;
+import org.camunda.spin.Spin;
 import org.springframework.stereotype.Component;
 
 @Component("stCheckMissingDocuments")
@@ -94,11 +93,8 @@ public class CheckMissingDocuments implements JavaDelegate {
     else missingDocumentsRetry = 0;
     delegateExecution.setVariable(MISSING_DOCUMENTS_RETRY_VARIABLE, missingDocumentsRetry);
     if (!missingDocumentList.isEmpty()) {
-      ObjectValue missingDocumentListTyped =
-          Variables.objectValue(missingDocumentList)
-              .serializationDataFormat(Variables.SerializationDataFormats.JAVA)
-              .create();
-      delegateExecution.setVariable(MISSING_DOCUMENTS_LIST_VARIABLE, missingDocumentListTyped);
+      delegateExecution.setVariable(
+          MISSING_DOCUMENTS_LIST_VARIABLE, Spin.JSON(missingDocumentList).toString());
       for (MissingDocument miss : missingDocumentList) {
         log.info(
             "Missing document with code(s) {} for creditor {}",

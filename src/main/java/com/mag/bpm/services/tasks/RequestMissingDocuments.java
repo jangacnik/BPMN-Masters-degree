@@ -1,6 +1,8 @@
 package com.mag.bpm.services.tasks;
 
+import static com.mag.bpm.commons.CreditProcessEventConstants.MAIL_NOT_FOUND_ERROR;
 import static com.mag.bpm.commons.CreditProcessVariables.MISSING_DOCUMENTS_LIST_VARIABLE;
+import static com.mag.bpm.commons.SpinMappingTypes.MAPPING_MISSING_DOCUMENTS_LIST;
 
 import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.documents.MissingDocument;
@@ -9,9 +11,11 @@ import com.mag.bpm.services.EmailService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.spin.Spin;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Component;
 
 @Component("stRequestMissingDocuments")
@@ -21,7 +25,6 @@ public class RequestMissingDocuments implements JavaDelegate {
 
   private final EmailService emailService;
   private final CreditProcessService creditProcessService;
-  private final RuntimeService runtimeService;
 
   @Override
   public void execute(DelegateExecution delegateExecution) throws Exception {
@@ -30,15 +33,17 @@ public class RequestMissingDocuments implements JavaDelegate {
         creditProcessService.getCreditOfferProcessVariable(delegateExecution.getId());
 
     List<MissingDocument> missingDocumentList =
-        (List<MissingDocument>)
-            runtimeService
-                .getVariableTyped(delegateExecution.getId(), MISSING_DOCUMENTS_LIST_VARIABLE)
-                .getValue();
+        Spin.JSON(delegateExecution.getVariable(MISSING_DOCUMENTS_LIST_VARIABLE))
+            .mapTo(MAPPING_MISSING_DOCUMENTS_LIST);
 
-    emailService.sendMissingDocumentsMail(
-        creditOffer.getCreditor1().getEmail(),
-        "Missing Documents",
-        missingDocumentList,
-        creditOffer);
+    try {
+      emailService.sendMissingDocumentsMail(
+          creditOffer.getCreditor1().getEmail(),
+          "Missing Documents",
+          missingDocumentList,
+          creditOffer);
+    } catch (MailException mailException) {
+      throw new BpmnError(MAIL_NOT_FOUND_ERROR);
+    }
   }
 }
