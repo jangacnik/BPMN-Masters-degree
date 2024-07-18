@@ -1,6 +1,6 @@
 package com.mag.bpm.models.rule;
 
-import com.mag.bpm.models.enums.DocumentCode;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +8,8 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class CreditCheck {
-  private final String ruleCode;
+public class CreditCheck implements Serializable {
   private final String description;
-  private final DocumentCode documentCode;
   private final String status;
   private String relatedDocument;
 }

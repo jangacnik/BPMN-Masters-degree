@@ -1,7 +1,6 @@
 package com.mag.bpm.services.tasks;
 
-import static com.mag.bpm.commons.CreditProcessVariables.IS_CREDITOR_1_CREDIBLE;
-import static com.mag.bpm.commons.CreditProcessVariables.IS_CREDITOR_2_CREDIBLE;
+import static com.mag.bpm.commons.CreditProcessVariables.ARE_CREDITORS_CREDIBLE;
 
 import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.Creditor;
@@ -27,12 +26,15 @@ public class CheckCreditorCredibility implements JavaDelegate {
         creditProcessService.getCreditOfferProcessVariable(delegateExecution.getId());
 
     Double creditor1NetSum = calculateNetSum(creditOffer.getCreditor1());
-
-    delegateExecution.setVariable(IS_CREDITOR_1_CREDIBLE, creditor1NetSum >= minCreditorNetSum);
+    Double creditor2NetSum;
 
     if (creditOffer.getCreditor2() != null) {
-      Double creditor2NetSum = calculateNetSum(creditOffer.getCreditor2());
-      delegateExecution.setVariable(IS_CREDITOR_2_CREDIBLE, creditor2NetSum >= minCreditorNetSum);
+      creditor2NetSum = calculateNetSum(creditOffer.getCreditor2());
+      delegateExecution.setVariable(
+          ARE_CREDITORS_CREDIBLE,
+          creditor1NetSum >= minCreditorNetSum && creditor2NetSum >= minCreditorNetSum);
+    } else {
+      delegateExecution.setVariable(ARE_CREDITORS_CREDIBLE, creditor1NetSum >= minCreditorNetSum);
     }
   }
 

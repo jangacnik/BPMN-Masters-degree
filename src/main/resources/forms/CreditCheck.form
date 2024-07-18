@@ -6,11 +6,75 @@
           "label": "Document description",
           "type": "textfield",
           "layout": {
+            "row": "Row_03ep1c8",
+            "columns": null
+          },
+          "id": "Field_1f96l2o",
+          "key": "description",
+          "readonly": true
+        },
+        {
+          "label": "Document Id",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_1ww3x7a",
+            "columns": null
+          },
+          "id": "Field_0j5djr5",
+          "key": "documentId",
+          "readonly": true
+        },
+        {
+          "label": "",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_1mhl4oe",
+            "columns": null
+          },
+          "id": "Field_1382o75",
+          "key": "documentCode",
+          "readonly": true
+        },
+        {
+          "label": "",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_1mhl4oe",
+            "columns": null
+          },
+          "id": "Field_1b1mq8k",
+          "key": "status"
+        }
+      ],
+      "showOutline": true,
+      "isRepeating": true,
+      "allowAddRemove": false,
+      "defaultRepetitions": null,
+      "label": "Auto checked documents",
+      "type": "dynamiclist",
+      "layout": {
+        "row": "Row_03eyvnf",
+        "columns": null
+      },
+      "id": "Field_1k5xfbd",
+      "path": "autoCheckedDocuments",
+      "properties": {},
+      "conditional": {
+        "hide": "=autoCheckedDocuments = [\n    {\n      \"description\": \"\",\n      \"documentId\": \"\",\n      \"documentCode\": \"\",\n      \"status\": \"\"\n    }\n  ]"
+      },
+      "verticalAlignment": "start"
+    },
+    {
+      "components": [
+        {
+          "label": "Document description",
+          "type": "textfield",
+          "layout": {
             "row": "Row_1b0jb7h",
             "columns": null
           },
           "id": "Field_0t6yemd",
-          "key": "descripti",
+          "key": "description",
           "disabled": false,
           "readonly": true
         },
@@ -33,7 +97,7 @@
             "columns": null
           },
           "id": "Field_0v4nxlg",
-          "key": "description",
+          "key": "documentCode",
           "properties": {},
           "readonly": true,
           "disabled": false
@@ -55,6 +119,10 @@
             {
               "label": "Auto-checked",
               "value": "AUTOCHECKED"
+            },
+            {
+              "label": "Not valid",
+              "value": "NOT_VALID"
             }
           ],
           "label": "Checked",
@@ -65,7 +133,10 @@
           },
           "id": "Field_0ii3i6t",
           "key": "check",
-          "defaultValue": "unchecked"
+          "defaultValue": "unchecked",
+          "validate": {
+            "required": true
+          }
         },
         {
           "label": "Separator",
@@ -81,14 +152,14 @@
       "isRepeating": true,
       "allowAddRemove": false,
       "defaultRepetitions": 1,
-      "label": "Document list:",
+      "label": "Unchecked documents",
       "type": "dynamiclist",
       "layout": {
         "row": "Row_09hlz1u",
         "columns": null
       },
       "id": "Field_0ft5vmj",
-      "path": "documentMetadataList",
+      "path": "uncheckedDocumentsForm",
       "disableCollapse": true,
       "verticalAlignment": "center"
     },
@@ -107,6 +178,16 @@
           "disabled": false
         },
         {
+          "height": 60,
+          "label": "Spacer",
+          "type": "spacer",
+          "layout": {
+            "row": "Row_03wbg4d",
+            "columns": null
+          },
+          "id": "Field_0o6c8ei"
+        },
+        {
           "values": [
             {
               "label": "Fullfilled",
@@ -119,17 +200,24 @@
             {
               "label": "Unchecked",
               "value": "UNCHECKED"
+            },
+            {
+              "label": "Not valid",
+              "value": "NOT_VALID"
             }
           ],
           "label": "Status",
           "type": "select",
           "layout": {
-            "row": "Row_0svshy7",
+            "row": "Row_03wbg4d",
             "columns": null
           },
           "id": "Field_0uhq7n6",
           "key": "status",
-          "defaultValue": "UNCHECKED"
+          "defaultValue": "UNCHECKED",
+          "validate": {
+            "required": true
+          }
         },
         {
           "label": "Separator",
@@ -154,6 +242,40 @@
       "id": "Field_175zbdq",
       "path": "creditChecks",
       "disableCollapse": true
+    },
+    {
+      "text": "Credit decision:",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0arha8y",
+        "columns": null
+      },
+      "id": "Field_1ok6r6j"
+    },
+    {
+      "values": [
+        {
+          "label": "Approved",
+          "value": "APPROVED"
+        },
+        {
+          "label": "Declined",
+          "value": "DECLINED"
+        }
+      ],
+      "label": "Decision",
+      "type": "select",
+      "layout": {
+        "row": "Row_0arha8y",
+        "columns": null
+      },
+      "id": "Field_0w5sc73",
+      "key": "creditDecision",
+      "defaultValue": "<none>",
+      "validate": {
+        "required": true
+      }
     }
   ],
   "type": "default",

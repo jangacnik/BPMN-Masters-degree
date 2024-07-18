@@ -63,6 +63,7 @@ public class DummyService {
       List.of(
           "Smartphone", "Car", "Fridge", "Appliance", "Smartwatch", "Table", "Computer", "Laptop");
 
+  private static final Map<String, String> documentCodeMapToDesc = new HashMap<>();
   private static final Double INCOME_MIN = 1200.0;
   private static final Double INCOME_MAX = 4200.0;
 
@@ -100,6 +101,15 @@ public class DummyService {
     documentOrigins = Arrays.asList(DocumentOrigin.values());
 
     objectMapper.registerModule(new JavaTimeModule());
+
+    documentCodeMapToDesc.put(DocumentCode.ID.getValue(), "Personal ID");
+    documentCodeMapToDesc.put(DocumentCode.PASSPORT.getValue(), "Passport");
+    documentCodeMapToDesc.put(DocumentCode.TERMS.getValue(), "Terms & Conditions");
+    documentCodeMapToDesc.put(DocumentCode.EMPLOYEMENT_CONTRACT.getValue(), "Employement Contract");
+    documentCodeMapToDesc.put(DocumentCode.PAYSLIP.getValue(), "Payslip");
+    documentCodeMapToDesc.put(DocumentCode.BILL.getValue(), "Bill");
+    documentCodeMapToDesc.put(DocumentCode.CREDIT_OFFER.getValue(), "Credit Offer");
+    documentCodeMapToDesc.put(DocumentCode.SALES_AGREEMENT.getValue(), "Sales Agreement");
   }
 
   public CreditRequestDto creatDummyCreditOfferDto(
@@ -191,7 +201,7 @@ public class DummyService {
     long daysSinceCreation = fairy.baseProducer().randomBetween(0, 100);
     return new DocumentMetadata(
         createRandomUuidString(),
-        documentCode.getValue(),
+        documentCodeMapToDesc.get(documentCode.getValue()),
         documentCode,
         createMetadataDummy(properties, creditData),
         LocalDateTime.now().minusDays(daysSinceCreation).toString(),

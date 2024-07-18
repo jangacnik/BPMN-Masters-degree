@@ -10,4 +10,7 @@ public class SpinMappingTypes {
       "java.util.ArrayList<com.mag.bpm.models.documents.DocumentMetadata>";
   public static final String MAPPING_MISSING_DOCUMENTS_LIST =
       "java.util.ArrayList<com.mag.bpm.models.documents.MissingDocument>";
+
+  public static final String MAPPING_CREDIT_CHECK_LIST =
+      "java.util.ArrayList<com.mag.bpm.models.forms.ManualPayoutResult>";
 }
