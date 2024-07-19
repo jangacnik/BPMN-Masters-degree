@@ -8,6 +8,7 @@ import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.documents.MissingDocument;
 import com.mag.bpm.services.CreditProcessService;
 import com.mag.bpm.services.EmailService;
+import jakarta.mail.MessagingException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -15,7 +16,6 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.spin.Spin;
-import org.springframework.mail.MailException;
 import org.springframework.stereotype.Component;
 
 @Component("stRequestMissingDocuments")
@@ -42,7 +42,8 @@ public class RequestMissingDocuments implements JavaDelegate {
           "Missing Documents",
           missingDocumentList,
           creditOffer);
-    } catch (MailException mailException) {
+    } catch (MessagingException mailException) {
+      log.error(mailException.getMessage());
       throw new BpmnError(MAIL_NOT_FOUND_ERROR);
     }
   }

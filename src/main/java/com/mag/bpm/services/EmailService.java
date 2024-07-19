@@ -1,5 +1,13 @@
 package com.mag.bpm.services;
 
+import static com.mag.bpm.commons.EmailNotificationConstants.EMAIL_CREDIT_SUM_VARIABLE;
+import static com.mag.bpm.commons.EmailNotificationConstants.EMAIL_CUSTOMER_VARIABLE;
+import static com.mag.bpm.commons.EmailNotificationConstants.EMAIL_MISSING_DOCUMENTS_LIST_VARIABLE;
+import static com.mag.bpm.commons.EmailNotificationConstants.EMAIL_OFFER_ID_VARIABLE;
+import static com.mag.bpm.commons.EmailNotificationConstants.MISSING_DOCUMENT_ITEM;
+import static com.mag.bpm.commons.EmailNotificationConstants.MISSING_DOCUMENT_ITEM_POSTFIX;
+import static com.mag.bpm.commons.EmailNotificationConstants.TEMPLATE_MISSING_DOCUMENTS;
+
 import com.mag.bpm.models.CreditOffer;
 import com.mag.bpm.models.documents.MissingDocument;
 import com.mag.bpm.models.enums.CreditorNumber;
@@ -28,13 +36,6 @@ public class EmailService {
   @Value("${spring.mail.username}")
   private String fromMail;
 
-  private static final String MISSING_DOCUMENT_ITEM = "Either one of %s %s";
-  private static final String MISSING_DOCUMENT_ITEM_POSTFIX = " for %s";
-
-  private static final String EMAIL_MISSING_DOCUMENTS_LIST_VARIABLE = "missingDocuments";
-  private static final String EMAIL_CUSTOMER_VARIABLE = "customer";
-  private static final String EMAIL_OFFER_ID_VARIABLE = "offerId";
-  private static final String TEMPLATE_MISSING_DOCUMENTS = "MissingDocumentsEmail";
 
   @Async
   public void sendMissingDocumentsMail(
@@ -73,6 +74,36 @@ public class EmailService {
         "Sent missing documents email for offer {} for the following missing documents {}",
         creditOffer.getOfferId(),
         missingDocumentsListItems.toString());
+  }
+
+  @Async
+  public void sendCreditOfferStatusMail(
+      String subject,
+      CreditOffer creditOffer,
+      String template)
+      throws MessagingException {
+    MimeMessage mimeMessage = mailSender.createMimeMessage();
+    MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+
+    mimeMessageHelper.setFrom(fromMail);
+    mimeMessageHelper.setTo(creditOffer.getCreditor1().getEmail());
+    mimeMessageHelper.setSubject(subject);
+
+    Context context = new Context();
+    context.setVariable(EMAIL_CREDIT_SUM_VARIABLE, creditOffer.getOffer().getOfferAmount());
+    context.setVariable(
+        EMAIL_CUSTOMER_VARIABLE,
+        creditOffer.getCreditor1().getName() + " " + creditOffer.getCreditor1().getFirstName());
+    context.setVariable(EMAIL_OFFER_ID_VARIABLE, creditOffer.getOfferId());
+    String processedString = templateEngine.process(template, context);
+
+    mimeMessageHelper.setText(processedString, true);
+
+    mailSender.send(mimeMessage);
+
+    log.info(
+        "Sent {} email for offer {}", template,
+        creditOffer.getOfferId());
   }
 
   private String getMissingDocumentsPostFix(
